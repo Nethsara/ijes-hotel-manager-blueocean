@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1050.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.siyum.blueoceanhotel.controller.ReportsFormController">
+    <children>
+        <AnchorPane layoutX="949.0" layoutY="6.0" prefHeight="44.0" prefWidth="95.0" style="-fx-background-radius: 30; -fx-background-color: #1b2130; -fx-border-color: white; -fx-border-radius: 30;">
+            <children>
+                <ImageView fitHeight="33.0" fitWidth="46.0" layoutX="54.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/user.png" />
+                    </image>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </ImageView>
+                <Circle fill="LIME" layoutX="59.0" layoutY="33.0" radius="5.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                <FontAwesomeIconView fill="WHITE" glyphName="BELL_ALT" layoutX="15.0" layoutY="31.0" size="26">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </FontAwesomeIconView>
+                <Circle fill="#fff900" layoutX="34.0" layoutY="15.0" radius="5.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+            </children>
+        </AnchorPane>
+        <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="899.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../assets/logo-without-text-2.png" />
+            </image>
+        </ImageView>
+        <TabPane layoutX="287.0" layoutY="67.0" prefHeight="514.0" prefWidth="752.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Daily">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="317.0" prefWidth="557.0">
+                            <children>
+                                <LineChart layoutX="14.0" layoutY="7.0" prefHeight="448.0" prefWidth="736.0" title="Daily Growth">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                    </yAxis>
+                                </LineChart>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Monthly">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <LineChart layoutX="14.0" layoutY="18.0" prefHeight="461.0" prefWidth="728.0" title="Monthly Growth">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                    </yAxis>
+                                </LineChart>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+      <AnchorPane prefHeight="600.0" prefWidth="278.0" style="-fx-background-color: #1b2130;">
+         <children>
+            <FontAwesomeIconView fill="WHITE" glyphName="HOME" layoutX="68.0" layoutY="314.0" size="20" wrappingWidth="11.142857551574707">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </FontAwesomeIconView>
+            <Label layoutX="99.0" layoutY="298.0" text="Dashboard" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="42.0" layoutY="293.0" onMouseClicked="#adminDashboardOnAction" opacity="0.1" prefHeight="27.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <ImageView fitHeight="77.0" fitWidth="70.0" layoutX="15.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/logo-without-text-2.png" />
+               </image>
+            </ImageView>
+            <Circle fx:id="btnClose" fill="RED" layoutX="14.0" layoutY="14.0" onMouseClicked="#closeOnAction" radius="7.0" stroke="TRANSPARENT" strokeType="INSIDE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Circle>
+            <Circle fx:id="btnMinimize" fill="YELLOW" layoutX="34.0" layoutY="14.0" onMouseClicked="#minimizeOnAction" radius="7.0" stroke="TRANSPARENT" strokeType="INSIDE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Circle>
+            <Label layoutX="96.0" layoutY="67.0" text="Blue Ocean Hotel" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Hyperlink layoutX="77.0" layoutY="554.0" text="Software By Siyum" />
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="98.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/user.png" />
+               </image>
+               <effect>
+                  <Glow level="0.13" />
+               </effect>
+            </ImageView>
+            <Label layoutX="49.0" layoutY="255.0" text="Nethsara's Account" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <FontAwesomeIconView fill="WHITE" glyphName="BELL" layoutX="71.0" layoutY="382.0" size="16" wrappingWidth="11.142857551574707">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </FontAwesomeIconView>
+            <FontAwesomeIconView fill="WHITE" glyphName="SPOON" layoutX="75.0" layoutY="343.0" size="18" wrappingWidth="11.142857551574707" />
+            <FontAwesomeIconView fill="WHITE" glyphName="BED" layoutX="69.0" layoutY="409.0" onMouseClicked="#roomsManagerOnAction" size="18" wrappingWidth="11.142857551574707" />
+            <FontAwesomeIconView fill="WHITE" glyphName="SHARE_SQUARE_ALT" layoutX="69.0" layoutY="477.0" onMouseClicked="#logoutOnAction" size="18" wrappingWidth="11.142857551574707" />
+            <AnchorPane layoutX="13.0" layoutY="505.0" prefHeight="25.0" prefWidth="234.0" style="-fx-background-color: black;">
+               <children>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CLOCK_ALT" layoutX="12.0" layoutY="20.0" size="20" />
+                  <Label layoutX="37.0" layoutY="4.0" text="Server Time : " textFill="WHITE" />
+                  <Label fx:id="lblDateTime" layoutX="115.0" layoutY="4.0" text="2022.10.10 : 22:00:59" textFill="WHITE" />
+               </children>
+            </AnchorPane>
+            <Label layoutX="67.0" layoutY="360.0" prefHeight="14.0" prefWidth="25.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="   99+" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="8.0" />
+               </font>
+            </Label>
+            <Label layoutX="100.0" layoutY="329.0" text="Meal Manager" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="100.0" layoutY="364.0" text="Notifications" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="100.0" layoutY="394.0" text="Room Manager" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="40.0" layoutY="325.0" onMouseClicked="#manageMealsOnAction" opacity="0.1" prefHeight="27.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <FontAwesomeIconView fill="#1ddadd" glyphName="LIST_ALT" layoutX="68.0" layoutY="441.0" onMouseClicked="#roomsManagerOnAction" size="18" wrappingWidth="11.142857551574707" />
+            <Label layoutX="95.0" layoutY="425.0" text="Report Manager" textFill="#1ddadd">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="97.0" layoutY="460.0" text="Logout" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="42.0" layoutY="357.0" opacity="0.1" prefHeight="27.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane layoutX="41.0" layoutY="390.0" onMouseClicked="#manageRoomsOnAction" opacity="0.1" prefHeight="27.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane layoutX="41.0" layoutY="422.0" opacity="0.1" prefHeight="27.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane layoutX="42.0" layoutY="455.0" onMouseClicked="#logoutOnAction" opacity="0.1" prefHeight="27.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+        <Separator layoutX="-17.0" layoutY="58.0" opacity="0.35" prefHeight="0.0" prefWidth="1066.0" />
+      <AnchorPane layoutX="278.0" layoutY="-2.0" prefHeight="60.0" prefWidth="772.0" style="-fx-background-color: #34a475;">
+         <children>
+            <AnchorPane layoutX="480.0" layoutY="13.0" prefHeight="35.0" prefWidth="278.0" style="-fx-border-color: white; -fx-border-radius: 5;">
+               <children>
+                  <Label layoutX="20.0" layoutY="9.0" text="Revenue Today : " textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="125.0" layoutY="9.0" text="LKR 1000000" textFill="#eeff00">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane layoutX="222.0" layoutY="4.0" prefHeight="25.0" prefWidth="41.0" style="-fx-border-color: yellow; -fx-border-radius: 5;">
+                     <children>
+                        <Label layoutX="7.0" layoutY="4.0" text="Admin " textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <Label layoutX="14.0" layoutY="16.0" text="Meals Manager" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+    </children>
+</AnchorPane>
