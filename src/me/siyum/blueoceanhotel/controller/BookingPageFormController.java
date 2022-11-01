@@ -56,7 +56,6 @@ public class BookingPageFormController {
     public JFXTextField txtFRoomPrice;
     public JFXTextField txtFDays;
     public JFXTextField txtFMealID;
-    public JFXTextField txtMealType;
     public JFXTextField txtFMealPrice;
     public JFXButton btnFinish;
     public JFXButton btnCancel;
@@ -389,7 +388,6 @@ public class BookingPageFormController {
     }
 
     private void setDateAndTime() {
-        // setTime
         Timeline time = new Timeline(
                 new KeyFrame(Duration.ZERO, e -> {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

@@ -26,12 +26,12 @@ public class AdminPageFormController {
     public void initialize(){
         setDateAndTime();
     }
-    public void closeOnAction(MouseEvent contextMenuEvent) {
+    public void closeOnAction() {
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
     }
 
-    public void minimizeOnAction(MouseEvent contextMenuEvent) {
+    public void minimizeOnAction() {
         Stage stage = (Stage) btnMinimize.getScene().getWindow();
         stage.setIconified(true);
     }

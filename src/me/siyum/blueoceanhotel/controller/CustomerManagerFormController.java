@@ -6,7 +6,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -99,7 +98,8 @@ public class CustomerManagerFormController {
             ObservableList<CustomerTm> tmList = FXCollections.observableArrayList();
             ResultSet set = CustomerController.searchText(searchText);
             while (set.next()) {
-                Button btn = new Button("Edit");
+                Button btn = new Button("Delete");
+                btn.setStyle("-fx-base: #c0392b;");
                 CustomerTm tm = new CustomerTm(
                         set.getString(1),
                         set.getString(2),
@@ -138,7 +138,8 @@ public class CustomerManagerFormController {
 
     }
 
-    public void saveCustomerOnAction(ActionEvent actionEvent) {
+
+    public void saveCustomerOnAction() {
         Customer r = new Customer(
                 generateID(),
                 txtName.getText(),
@@ -148,12 +149,44 @@ public class CustomerManagerFormController {
                 txtAddress.getText()
         );
         if (btnSaveCustomer.getText().equalsIgnoreCase("Save Customer")) {
+            if(!CustomerController.validateName(r.getName())){
+                new Alert(Alert.AlertType.ERROR, "Please check Name " ).show();
+                txtName.setStyle("-jfx-focus-color: red;");
+                txtName.requestFocus();
+                return;
+            }else if(!CustomerController.validateNIC(r.getNic())){
+                new Alert(Alert.AlertType.ERROR, "Please check NIC").show();
+                txtNIC.setStyle("-jfx-focus-color: red;");
+                txtNIC.requestFocus();
+                return;
+            }else if(!CustomerController.validatePhone(r.getPhone())){
+                new Alert(Alert.AlertType.ERROR, "Please check Phone Number " ).show();
+                txtPhone.setStyle("-jfx-focus-color: red;");
+                txtPhone.requestFocus();
+                return;
+            }else if(!CustomerController.validateEmail(r.getEmail())){
+                new Alert(Alert.AlertType.ERROR, "Please check the email!").show();
+                txtEmail.setStyle("-jfx-focus-color: red;");
+                txtEmail.requestFocus();
+                return;
+            }else if(!CustomerController.validateAddress(r.getAddress())){
+                new Alert(Alert.AlertType.ERROR, "Please check Address" ).show();
+                txtAddress.setStyle("-jfx-focus-color: red;");
+                txtAddress.requestFocus();
+                return;
+            }
             try {
                 boolean isSavedCust = CustomerController.saveCustomer(r);
                 if (isSavedCust) {
                     searchCustomers(searchText);
                     clearFields();
-                    new Alert(Alert.AlertType.INFORMATION, "Room Saved!").show();
+                    new Alert(Alert.AlertType.INFORMATION, "Customer Saved!").show();
+                    txtEmail.setStyle("-jfx-focus-color: #4059a9;");
+                    txtAddress.setStyle("-jfx-focus-color: #4059a9;");
+                    txtName.setStyle("-jfx-focus-color: #4059a9;");
+                    txtNIC.setStyle("-jfx-focus-color: #4059a9;");
+                    txtPhone.setStyle("-jfx-focus-color: #4059a9;");
+
                 } else {
                     new Alert(Alert.AlertType.WARNING, "Try Again!").show();
                 }
@@ -176,12 +209,12 @@ public class CustomerManagerFormController {
         }
     }
 
-    public void newCustomerOnAction(ActionEvent actionEvent) {
+    public void newCustomerOnAction() {
         btnSaveCustomer.setText("Save Customer");
     }
 
     private String generateID() {
-        ResultSet set = null;
+        ResultSet set;
         try {
             set = CustomerController.getLastID();
             if (set.next()) {
@@ -205,12 +238,12 @@ public class CustomerManagerFormController {
         txtName.clear();
     }
 
-    public void closeOnAction(MouseEvent mouseEvent) {
+    public void closeOnAction() {
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
     }
 
-    public void minimizeOnAction(MouseEvent mouseEvent) {
+    public void minimizeOnAction() {
         Stage stage = (Stage) btnMinimize.getScene().getWindow();
         stage.setIconified(true);
     }

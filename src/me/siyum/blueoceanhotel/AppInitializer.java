@@ -20,7 +20,7 @@ public class AppInitializer extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(
-                getClass().getResource("view/WelcomePageForm.fxml")
+                getClass().getResource("view/CustomerManagerPageForm.fxml")
         );
         primaryStage.setScene(new Scene(root));
         primaryStage.initStyle(StageStyle.UNDECORATED);

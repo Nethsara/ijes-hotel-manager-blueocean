@@ -8,8 +8,10 @@ import me.siyum.blueoceanhotel.util.CRUDUtil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class CustomerController {
+
     public static ResultSet searchText(String searchText) throws SQLException, ClassNotFoundException {
         return CRUDUtil.execute("SELECT * FROM customers WHERE id LIKE ? || name LIKE ?", searchText, searchText);
     }
@@ -41,5 +43,46 @@ public class CustomerController {
             idList.add(set.getString("id"));
         }
         return FXCollections.observableArrayList(idList);
+    }
+
+    public static boolean validateEmail(String email) {
+        if(email==null || email.isEmpty()){
+            return false;
+        }
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern emailPattern =Pattern.compile(emailRegex);
+
+        if(emailPattern.matcher(email).matches()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public static boolean validateNIC(String nic){
+        if(nic.length() == 12) return true;
+        return false;
+    }
+
+    public static boolean validatePhone(String phone) {
+        if(phone==null || phone.isEmpty()){
+            return false;
+        }
+        String phoneRegex = "^(075|077|071)([0-9]{7})$";
+        Pattern phonePattern =Pattern.compile(phoneRegex);
+
+        if(phonePattern.matcher(phone).matches()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public static boolean validateName(String name) {
+        return !name.isEmpty();
+    }
+
+    public static boolean validateAddress(String address) {
+        return !address.isEmpty();
     }
 }
