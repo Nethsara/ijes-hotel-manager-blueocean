@@ -85,4 +85,22 @@ public class CustomerController {
     public static boolean validateAddress(String address) {
         return !address.isEmpty();
     }
+
+    public static String getCustomerCount() throws SQLException, ClassNotFoundException {
+        ResultSet execute = CRUDUtil.execute("SELECT COUNT(id) FROM customers;");
+        String x = "N/A";
+        if(execute.next()){
+            x = execute.getString(1);
+        }
+        return x;
+    }
+
+    public static String getStaffCount() throws SQLException, ClassNotFoundException {
+        ResultSet execute = CRUDUtil.execute("SELECT COUNT(id) FROM user;");
+        String x = "N/A";
+        if(execute.next()){
+            x = execute.getString(1);
+        }
+        return x;
+    }
 }

@@ -124,325 +124,336 @@ public class BookingPageFormController {
                         set.getString(1),
                         set.getString(2),
                         set.getDouble(3),
-                        set.getBoolean(4)? "No" :  "Yes",
+                        set.getBoolean(4) ? "No" : "Yes",
                         set.getBoolean(5) ? "Yes" : "No",
                         btn);
                 tmList.add(tm);
                 btn.setOnAction(event -> {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                            "Want to Book Room : " + tm.getId() + " ?",
-                            ButtonType.YES, ButtonType.NO);
-                    Optional<ButtonType> buttonType = alert.showAndWait();
-                    if (buttonType.get() == ButtonType.YES) {
-                        if (btn.getText().equalsIgnoreCase("Book")) {
-                            stepTwo(tm);
-                            btnSelectMeals.setOnAction(e -> {
-                                stepThree();
-                                btnFinalize.setOnAction(ev -> {
-                                    stepFour();
-                                    double total = Double.parseDouble(txtPricePerNight.getText()) *
-                                            Double.parseDouble(txtDays.getText()) +
-                                            Double.parseDouble(txtFMealPrice.getText());
-                                    lblTotal.setText(String.valueOf(total));
-                                    btnFinish.setOnAction(evnt -> {
-                                        Book b = new Book(
-                                                generateBookingID(),
-                                                txtFRoomID.getText(),
-                                                String.valueOf(java.time.LocalDate.now()),
-                                                String.valueOf(java.time.LocalTime.now()),
-                                                txtFRoomID.getText(),
-                                                txtFMealID.getText(),
-                                                Double.parseDouble(txtPricePerNight.getText()) + Double.parseDouble(txtFMealPrice.getText())
-                                        );
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                                    "Want to Book Room : " + tm.getId() + " ?",
+                                    ButtonType.YES, ButtonType.NO);
+                            Optional<ButtonType> buttonType = alert.showAndWait();
+                            if (buttonType.get() == ButtonType.YES) {
+                                if (btn.getText().equalsIgnoreCase("Book")) {
+                                    stepTwo(tm);
+                                    btnSelectMeals.setOnAction(e -> {
+                                        stepThree();
+                                        btnFinalize.setOnAction(ev -> {
+                                            stepFour();
+                                            double total = Double.parseDouble(txtPricePerNight.getText()) *
+                                                    Double.parseDouble(txtDays.getText()) +
+                                                    Double.parseDouble(txtFMealPrice.getText());
+                                            lblTotal.setText(String.valueOf(total));
+                                            btnFinish.setOnAction(evnt -> {
+                                                Alert alertE = new Alert(Alert.AlertType.CONFIRMATION,
+                                                        "are you sure whether do you want to place this Order?",
+                                                        ButtonType.YES, ButtonType.NO);
+                                                Optional<ButtonType> bt = alertE.showAndWait();
+                                                if (bt.get() == ButtonType.NO) { return;}
+                                                    Book b = new Book(
+                                                            generateBookingID(),
+                                                            txtFRoomID.getText(),
+                                                            String.valueOf(java.time.LocalDate.now()),
+                                                            String.valueOf(java.time.LocalTime.now()),
+                                                            txtFRoomID.getText(),
+                                                            txtFMealID.getText(),
+                                                            Double.parseDouble(txtPricePerNight.getText()) + Double.parseDouble(txtFMealPrice.getText())
+                                                    );
 
-                                        try {
-                                            boolean isSavedBooking = RoomsReservationController.saveBooking(b);
-                                            if (isSavedBooking) {
-                                                RoomsController.changeReservationStatus(b.getRoomID());
-                                                new Alert(Alert.AlertType.INFORMATION, "Placed SuccessFully!").showAndWait();
-                                                preparePrintPage();
-                                                panePrint.setVisible(true);
-                                                searchRooms(searchText);
-                                            } else {
-                                                new Alert(Alert.AlertType.ERROR, "Error Placing!").show();
-                                            }
-                                        } catch (SQLException | ClassNotFoundException ex) {
-                                            ex.printStackTrace();
-                                        }
-                                    });
-                                });
+                                                    try {
+                                                        boolean isSavedBooking = RoomsReservationController.saveBooking(b);
+                                                        if (isSavedBooking) {
+                                                            RoomsController.changeReservationStatus(b.getRoomID());
+                                                            new Alert(Alert.AlertType.INFORMATION, "Placed SuccessFully!").showAndWait();
+                                                            preparePrintPage();
+                                                            panePrint.setVisible(true);
+                                                            searchRooms(searchText);
+                                                        } else {
+                                                            new Alert(Alert.AlertType.ERROR, "Error Placing!").show();
+                                                        }
+                                                    } catch (SQLException | ClassNotFoundException ex) {
+                                                        ex.printStackTrace();
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    }
+                                }
+
                             });
                         }
-                    }
+                        tblReserve.setItems(tmList);
 
-                });
+            } catch(ClassNotFoundException | SQLException e){
+                new Alert(Alert.AlertType.ERROR, "Error Connecting DB, Please contact system admin");
             }
-            tblReserve.setItems(tmList);
-
-        } catch (ClassNotFoundException | SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "Error Connecting DB, Please contact system admin");
         }
-    }
 
-    public void stepOne() {
-        line1.setOpacity(0.2);
-        line2.setOpacity(0.2);
-        line3.setOpacity(0.2);
+        public void stepOne () {
+            line1.setOpacity(0.2);
+            line2.setOpacity(0.2);
+            line3.setOpacity(0.2);
 
-        Image img = new Image("me/siyum/blueoceanhotel/assets/step1.gif");
-        imgStep1.setImage(img);
-        panePrint.setVisible(false);
-        paneMeals.setVisible(false);
-        paneFinalPage.setVisible(false);
-        paneOptions.setVisible(false);
-        paneTbl.setVisible(true);
-    }
+            Image img = new Image("me/siyum/blueoceanhotel/assets/step1.gif");
+            imgStep1.setImage(img);
+            panePrint.setVisible(false);
+            paneMeals.setVisible(false);
+            paneFinalPage.setVisible(false);
+            paneOptions.setVisible(false);
+            paneTbl.setVisible(true);
+        }
 
-    public void stepTwo(RoomTm r) {
-        line1.setOpacity(1);
-        Image img = new Image("me/siyum/blueoceanhotel/assets/step1.png");
-        imgStep1.setImage(img);
+        public void stepTwo (RoomTm r){
+            line1.setOpacity(1);
+            Image img = new Image("me/siyum/blueoceanhotel/assets/step1.png");
+            imgStep1.setImage(img);
 
-        Image img2 = new Image("me/siyum/blueoceanhotel/assets/step2.gif");
-        imgStep2.setImage(img2);
-        panePrint.setVisible(false);
-        paneMeals.setVisible(false);
-        paneFinalPage.setVisible(false);
-        paneOptions.setVisible(true);
-        paneTbl.setVisible(false);
+            Image img2 = new Image("me/siyum/blueoceanhotel/assets/step2.gif");
+            imgStep2.setImage(img2);
+            panePrint.setVisible(false);
+            paneMeals.setVisible(false);
+            paneFinalPage.setVisible(false);
+            paneOptions.setVisible(true);
+            paneTbl.setVisible(false);
 
-        loadRooms();
-        loadCustomers();
-        cmbRoomID.setValue(r.getId());
-        txtType.setText(r.getType());
-        txtPricePerNight.setText(String.valueOf(r.getPrice()));
+            loadRooms();
+            loadCustomers();
+            cmbRoomID.setValue(r.getId());
+            txtType.setText(r.getType());
+            txtPricePerNight.setText(String.valueOf(r.getPrice()));
 
-        cmbRoomID.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                setRoomDetails();
+            cmbRoomID.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    setRoomDetails();
+                }
+            }));
+        }
+
+        private void stepThree () {
+            line2.setOpacity(1);
+            Image img = new Image("me/siyum/blueoceanhotel/assets/step2.png");
+            imgStep2.setImage(img);
+
+            Image img2 = new Image("me/siyum/blueoceanhotel/assets/step3.gif");
+            imgStep3.setImage(img2);
+            panePrint.setVisible(false);
+            paneMeals.setVisible(true);
+            paneFinalPage.setVisible(false);
+            paneOptions.setVisible(false);
+            paneTbl.setVisible(false);
+
+            cmbMealSelect.setDisable(true);
+            txtMealName.setDisable(true);
+            txtMealPrice.setDisable(true);
+            chkMeals.setSelected(false);
+            cmbMealSelect.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    setMealDetails();
+                }
+            }));
+        }
+
+        private void stepFour () {
+            line3.setOpacity(1);
+            Image img = new Image("me/siyum/blueoceanhotel/assets/step3.png");
+            imgStep3.setImage(img);
+
+            Image img2 = new Image("me/siyum/blueoceanhotel/assets/step4.gif");
+            imgStep4.setImage(img2);
+
+            panePrint.setVisible(false);
+            paneMeals.setVisible(false);
+            paneFinalPage.setVisible(true);
+            paneOptions.setVisible(false);
+            paneTbl.setVisible(false);
+
+            txtFDays.setText(txtDays.getText());
+            txtFRoomID.setText(String.valueOf(cmbRoomID.getValue()));
+            txtFMealID.setText(String.valueOf(cmbMealSelect.getValue()));
+            txtFRoomPrice.setText(txtPricePerNight.getText());
+            txtFRoomType.setText(txtType.getText());
+            txtFMealPrice.setText(txtMealPrice.getText());
+            txtFMealType.setText(txtMealName.getText());
+            txtFCustID.setText(String.valueOf(cmbCust.getValue()));
+        }
+
+        private void setMealDetails () {
+            try {
+                ResultSet res = CRUDUtil.execute("SELECT * FROM meals WHERE id =?",
+                        cmbMealSelect.getValue());
+                if (res.next()) {
+                    txtMealPrice.setText(res.getString(2));
+                    txtMealName.setText(res.getString(3));
+                }
+            } catch (SQLException | ClassNotFoundException e) {
+                new Alert(Alert.AlertType.ERROR, "Error on DB, Please contact system admin");
             }
-        }));
-    }
-
-    private void stepThree() {
-        line2.setOpacity(1);
-        Image img = new Image("me/siyum/blueoceanhotel/assets/step2.png");
-        imgStep2.setImage(img);
-
-        Image img2 = new Image("me/siyum/blueoceanhotel/assets/step3.gif");
-        imgStep3.setImage(img2);
-        panePrint.setVisible(false);
-        paneMeals.setVisible(true);
-        paneFinalPage.setVisible(false);
-        paneOptions.setVisible(false);
-        paneTbl.setVisible(false);
-
-        cmbMealSelect.setDisable(true);
-        txtMealName.setDisable(true);
-        txtMealPrice.setDisable(true);
-
-
-        boolean selected = chkMeals.isSelected();
-        if (!selected) {
-            loadMeals();
-            cmbMealSelect.setDisable(false);
-            txtMealName.setDisable(false);
-            txtMealPrice.setDisable(false);
         }
 
-        cmbMealSelect.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                setMealDetails();
+        private void loadMeals () {
+            try {
+                ObservableList<String> allMeals = MealsController.getAllMeals();
+                cmbMealSelect.setItems(allMeals);
+            } catch (SQLException | ClassNotFoundException e) {
+                new Alert(Alert.AlertType.ERROR, "Meals Loading Error, Please contact system admin");
+
             }
-        }));
-    }
+        }
 
-    private void stepFour() {
-        line3.setOpacity(1);
-        Image img = new Image("me/siyum/blueoceanhotel/assets/step3.png");
-        imgStep3.setImage(img);
+        private void loadCustomers () {
+            try {
+                ObservableList<String> allCust = CustomerController.getAllAvailableRooms();
+                cmbCust.setItems(allCust);
+            } catch (SQLException | ClassNotFoundException e) {
+                new Alert(Alert.AlertType.ERROR, "Customers Loading Error, Please contact system admin");
 
-        Image img2 = new Image("me/siyum/blueoceanhotel/assets/step4.gif");
-        imgStep4.setImage(img2);
-
-        panePrint.setVisible(false);
-        paneMeals.setVisible(false);
-        paneFinalPage.setVisible(true);
-        paneOptions.setVisible(false);
-        paneTbl.setVisible(false);
-
-        txtFDays.setText(txtDays.getText());
-        txtFRoomID.setText(String.valueOf(cmbRoomID.getValue()));
-        txtFMealID.setText(String.valueOf(cmbMealSelect.getValue()));
-        txtFRoomPrice.setText(txtPricePerNight.getText());
-        txtFRoomType.setText(txtType.getText());
-        txtFMealPrice.setText(txtMealPrice.getText());
-        txtFMealType.setText(txtMealName.getText());
-        txtFCustID.setText(String.valueOf(cmbCust.getValue()));
-    }
-
-    private void setMealDetails() {
-        try {
-            ResultSet res = CRUDUtil.execute("SELECT * FROM meals WHERE id =?",
-                    cmbMealSelect.getValue());
-            if (res.next()) {
-                txtMealPrice.setText(res.getString(2));
-                txtMealName.setText(res.getString(3));
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            new Alert(Alert.AlertType.ERROR, "Error on DB, Please contact system admin");
         }
-    }
 
-    private void loadMeals() {
-        try {
-            ObservableList<String> allMeals = MealsController.getAllMeals();
-            cmbMealSelect.setItems(allMeals);
-        } catch (SQLException | ClassNotFoundException e) {
-            new Alert(Alert.AlertType.ERROR, "Meals Loading Error, Please contact system admin");
-
-        }
-    }
-
-    private void loadCustomers() {
-        try {
-            ObservableList<String> allCust = CustomerController.getAllAvailableRooms();
-            cmbCust.setItems(allCust);
-        } catch (SQLException | ClassNotFoundException e) {
-            new Alert(Alert.AlertType.ERROR, "Customers Loading Error, Please contact system admin");
-
-        }
-    }
-
-    private void setRoomDetails() {
-        try {
-            ResultSet res = CRUDUtil.execute("SELECT * FROM rooms WHERE id =?",
-                    cmbRoomID.getValue());
-            if (res.next()) {
-                txtType.setText(res.getString(2));
-                txtPricePerNight.setText(res.getString(3));
+        private void setRoomDetails () {
+            try {
+                ResultSet res = CRUDUtil.execute("SELECT * FROM rooms WHERE id =?",
+                        cmbRoomID.getValue());
+                if (res.next()) {
+                    txtType.setText(res.getString(2));
+                    txtPricePerNight.setText(res.getString(3));
+                }
+            } catch (SQLException | ClassNotFoundException e) {
+                new Alert(Alert.AlertType.ERROR, "Rooms Loading Error, Please contact system admin");
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            new Alert(Alert.AlertType.ERROR, "Rooms Loading Error, Please contact system admin");
         }
-    }
 
-    private void loadRooms() {
-        try {
-            ObservableList<String> allRooms = RoomsController.getAllAvailableRooms();
-            cmbRoomID.setItems(allRooms);
-        } catch (SQLException | ClassNotFoundException e) {
-            new Alert(Alert.AlertType.ERROR, "Rooms Loading Error, Please contact system admin");
-        }
-    }
-
-    public String generateBookingID() {
-        ResultSet set = null;
-        try {
-            set = RoomsReservationController.getLastID();
-
-            if (set.next()) {
-                String tempOrderId = set.getString(1);
-                System.out.println(tempOrderId);
-                String[] array = tempOrderId.split("-");//[D,3]
-                int tempNumber = Integer.parseInt(array[1]);
-                int finalizeOrderId = tempNumber + 1;
-                return String.format("RR-%03d", finalizeOrderId);
+        private void loadRooms () {
+            try {
+                ObservableList<String> allRooms = RoomsController.getAllAvailableRooms();
+                cmbRoomID.setItems(allRooms);
+            } catch (SQLException | ClassNotFoundException e) {
+                new Alert(Alert.AlertType.ERROR, "Rooms Loading Error, Please contact system admin");
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            new Alert(Alert.AlertType.ERROR, "DB Loading Error, Please contact system admin");
         }
-        return "RR-001";
-    }
 
-    public void preparePrintPage() {
-        txtPDays.setText(txtDays.getText());
-        txtPRoomID.setText(String.valueOf(cmbRoomID.getValue()));
-        txtPMealID.setText(String.valueOf(cmbMealSelect.getValue()));
-        txtPRoomPrice.setText(txtPricePerNight.getText());
-        txtPRoomType.setText(txtType.getText());
-        txtPMealPrice.setText(txtMealPrice.getText());
-        txtPMealType.setText(txtMealName.getText());
-    }
+        public String generateBookingID () {
+            ResultSet set = null;
+            try {
+                set = RoomsReservationController.getLastID();
 
-    public void printOnAction(ActionEvent actionEvent) {
-        stepOne();
-    }
+                if (set.next()) {
+                    String tempOrderId = set.getString(1);
+                    System.out.println(tempOrderId);
+                    String[] array = tempOrderId.split("-");//[D,3]
+                    int tempNumber = Integer.parseInt(array[1]);
+                    int finalizeOrderId = tempNumber + 1;
+                    return String.format("RR-%03d", finalizeOrderId);
+                }
+            } catch (SQLException | ClassNotFoundException e) {
+                new Alert(Alert.AlertType.ERROR, "DB Loading Error, Please contact system admin");
+            }
+            return "RR-001";
+        }
 
-    public void cancelOnAction(ActionEvent actionEvent) {
-        stepOne();
-    }
+        public void preparePrintPage () {
+            txtPDays.setText(txtDays.getText());
+            txtPRoomID.setText(String.valueOf(cmbRoomID.getValue()));
+            txtPMealID.setText(String.valueOf(cmbMealSelect.getValue()));
+            txtPRoomPrice.setText(txtPricePerNight.getText());
+            txtPRoomType.setText(txtType.getText());
+            txtPMealPrice.setText(txtMealPrice.getText());
+            txtPMealType.setText(txtMealName.getText());
+        }
 
-    public void backToStepOneOnAction(ActionEvent actionEvent) {
-        stepOne();
-    }
+        public void printOnAction (ActionEvent actionEvent){
+            stepOne();
+        }
 
-    public void closeOnAction(MouseEvent mouseEvent) {
-        Stage stage = (Stage) btnClose.getScene().getWindow();
-        stage.close();
-    }
+        public void cancelOnAction (ActionEvent actionEvent){
+            stepOne();
+        }
 
-    public void minimizeOnAction(MouseEvent mouseEvent) {
-        Stage stage = (Stage) btnMinimize.getScene().getWindow();
-        stage.setIconified(true);
-    }
+        public void backToStepOneOnAction (ActionEvent actionEvent){
+            stepOne();
+        }
 
-    private void setDateAndTime() {
-        Timeline time = new Timeline(
-                new KeyFrame(Duration.ZERO, e -> {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                    lblDateandTime.setText(LocalDateTime.now().format(formatter));
-                }), new KeyFrame(Duration.seconds(1)));
-        time.setCycleCount(Animation.INDEFINITE);
-        time.play();
-    }
+        public void closeOnAction (MouseEvent mouseEvent){
+            Stage stage = (Stage) btnClose.getScene().getWindow();
+            stage.close();
+        }
 
-    public void customerManagementOnAction(MouseEvent mouseEvent) {
-        try {
-            Navigation.navigate(Routes.CUSTOMER, mouseEvent);
-        } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR, "Error loading UI");
+        public void minimizeOnAction (MouseEvent mouseEvent){
+            Stage stage = (Stage) btnMinimize.getScene().getWindow();
+            stage.setIconified(true);
+        }
+
+        private void setDateAndTime () {
+            Timeline time = new Timeline(
+                    new KeyFrame(Duration.ZERO, e -> {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                        lblDateandTime.setText(LocalDateTime.now().format(formatter));
+                    }), new KeyFrame(Duration.seconds(1)));
+            time.setCycleCount(Animation.INDEFINITE);
+            time.play();
+        }
+
+        public void customerManagementOnAction (MouseEvent mouseEvent){
+            try {
+                Navigation.navigate(Routes.CUSTOMER, mouseEvent);
+            } catch (IOException e) {
+                new Alert(Alert.AlertType.ERROR, "Error loading UI");
+            }
+        }
+
+        public void roomsManagerOnAction (MouseEvent mouseEvent){
+            try {
+                Navigation.navigate(Routes.STAFFROOM, mouseEvent);
+            } catch (IOException e) {
+                new Alert(Alert.AlertType.ERROR, "Error loading UI");
+            }
+        }
+
+        public void logoutOnAction (MouseEvent mouseEvent){
+            try {
+                Navigation.navigate(Routes.LOGIN, mouseEvent);
+            } catch (IOException e) {
+                new Alert(Alert.AlertType.ERROR, "Error loading UI");
+            }
+        }
+
+        public void staffDashboardOnAction (MouseEvent mouseEvent){
+            try {
+                Navigation.navigate(Routes.STAFF, mouseEvent);
+            } catch (IOException e) {
+                new Alert(Alert.AlertType.ERROR, "Error loading UI");
+            }
+        }
+
+        public void customerManagerOnAction (MouseEvent mouseEvent){
+            try {
+                Navigation.navigate(Routes.CUSTOMER, mouseEvent);
+            } catch (IOException e) {
+                new Alert(Alert.AlertType.ERROR, "Error loading UI");
+            }
+        }
+
+
+        public void roomManagerOnAction (MouseEvent mouseEvent){
+            try {
+                Navigation.navigate(Routes.STAFFROOM, mouseEvent);
+            } catch (IOException e) {
+                new Alert(Alert.AlertType.ERROR, "Error loading UI");
+            }
+        }
+
+        public void stateChanged (ActionEvent actionEvent){
+            boolean selected = chkMeals.isSelected();
+            System.out.println();
+            if (selected) {
+                loadMeals();
+                cmbMealSelect.setDisable(false);
+                txtMealName.setDisable(false);
+                txtMealPrice.setDisable(false);
+            } else {
+                cmbMealSelect.setDisable(true);
+                txtMealName.setDisable(true);
+                txtMealPrice.setDisable(true);
+            }
         }
     }
-
-    public void roomsManagerOnAction(MouseEvent mouseEvent) {
-        try {
-            Navigation.navigate(Routes.STAFFROOM, mouseEvent);
-        } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR, "Error loading UI");
-        }
-    }
-
-    public void logoutOnAction(MouseEvent mouseEvent) {
-        try {
-            Navigation.navigate(Routes.LOGIN, mouseEvent);
-        } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR, "Error loading UI");
-        }
-    }
-
-    public void staffDashboardOnAction(MouseEvent mouseEvent) {
-        try {
-            Navigation.navigate(Routes.STAFF, mouseEvent);
-        } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR, "Error loading UI");
-        }
-    }
-
-    public void customerManagerOnAction(MouseEvent mouseEvent) {
-        try {
-            Navigation.navigate(Routes.CUSTOMER, mouseEvent);
-        } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR, "Error loading UI");
-        }
-    }
-
-
-    public void roomManagerOnAction(MouseEvent mouseEvent) {
-        try {
-            Navigation.navigate(Routes.STAFFROOM, mouseEvent);
-        } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR, "Error loading UI");
-        }
-    }
-}

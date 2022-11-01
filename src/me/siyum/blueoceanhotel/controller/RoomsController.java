@@ -90,4 +90,31 @@ public class RoomsController {
     public static ResultSet getLastID() throws SQLException, ClassNotFoundException {
         return CRUDUtil.execute("SELECT id FROM room_up ORDER BY id DESC LIMIT 1");
     }
+
+    public static String getRoomCount() throws SQLException, ClassNotFoundException {
+        ResultSet execute = CRUDUtil.execute("SELECT COUNT(id) FROM room_up;");
+        String x = "N/A";
+        if(execute.next()){
+            x = execute.getString(1);
+        }
+        return x;
+    }
+
+    public static String getAllAvailableRoomsCount() throws SQLException, ClassNotFoundException {
+        ResultSet execute = CRUDUtil.execute("SELECT COUNT(id) FROM room_up WHERE status=true && reserved=false;");
+        String x = "N/A";
+        if(execute.next()){
+            x = execute.getString(1);
+        }
+        return x;
+    }
+
+    public static String getRoomReservedCount() throws SQLException, ClassNotFoundException {
+        ResultSet execute = CRUDUtil.execute("SELECT COUNT(id) FROM room_up WHERE status=false && reserved=true;");
+        String x = "N/A";
+        if(execute.next()){
+            x = execute.getString(1);
+        }
+        return x;
+    }
 }

@@ -24,7 +24,7 @@
                               <Font size="18.0" />
                           </font>
                       </Label>
-                      <Label layoutX="51.0" layoutY="64.0" text="25" textFill="WHITE">
+                      <Label fx:id="lblTotalRooms" layoutX="51.0" layoutY="64.0" text="25" textFill="WHITE">
                           <font>
                               <Font name="System Bold" size="50.0" />
                           </font>
@@ -43,7 +43,7 @@
                               <Font size="18.0" />
                           </font>
                       </Label>
-                      <Label layoutX="51.0" layoutY="63.0" text="10" textFill="WHITE">
+                      <Label fx:id="lblTotalCustomer" layoutX="51.0" layoutY="63.0" text="10" textFill="WHITE">
                           <font>
                               <Font name="System Bold" size="50.0" />
                           </font>
@@ -62,7 +62,7 @@
                               <Font size="18.0" />
                           </font>
                       </Label>
-                      <Label layoutX="54.0" layoutY="64.0" text="3" textFill="WHITE">
+                      <Label fx:id="lblTotalStaff" layoutX="54.0" layoutY="64.0" text="3" textFill="WHITE">
                           <font>
                               <Font name="System Bold" size="50.0" />
                           </font>
@@ -81,7 +81,7 @@
                               <Font size="18.0" />
                           </font>
                       </Label>
-                      <Label layoutX="58.0" layoutY="64.0" text="15" textFill="WHITE">
+                      <Label fx:id="lblTotalMeals" layoutX="58.0" layoutY="64.0" text="15" textFill="WHITE">
                           <font>
                               <Font name="System Bold" size="50.0" />
                           </font>
@@ -105,7 +105,7 @@
                               <Image url="@../assets/money.png" />
                           </image>
                       </ImageView>
-                      <Label layoutX="254.0" layoutY="10.0" text="10000000" textFill="WHITE">
+                      <Label fx:id="lblTotalRevenue" layoutX="254.0" layoutY="10.0" text="10000000" textFill="WHITE">
                           <font>
                               <Font name="System Bold" size="50.0" />
                           </font>
@@ -286,10 +286,22 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <JFXButton layoutX="29.0" layoutY="31.0" onAction="#manageRoomsOnAction" style="-fx-background-color: #617abb;" text="Add Rooms" textFill="WHITE" />
-                  <JFXButton layoutX="150.0" layoutY="31.0" onAction="#manageMealsOnAction" style="-fx-background-color: #34a475;" text="Add Meals" textFill="WHITE" />
-                  <JFXButton layoutX="265.0" layoutY="31.0" onAction="#manageReportsOnAction" style="-fx-background-color: #ffca28;" text="Reports" textFill="WHITE" />
-                  <JFXButton layoutX="360.0" layoutY="31.0" onAction="#logAsStaffOnAction" style="-fx-background-color: #ff4155;" text="Login as Receptionist" textFill="WHITE" />
+                  <JFXButton layoutX="29.0" layoutY="31.0" onAction="#manageRoomsOnAction" style="-fx-background-color: #617abb;" text="Add Rooms" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXButton>
+                  <JFXButton layoutX="150.0" layoutY="31.0" onAction="#manageMealsOnAction" style="-fx-background-color: #34a475;" text="Add Meals" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXButton>
+                  <JFXButton layoutX="265.0" layoutY="31.0" onAction="#manageReportsOnAction" style="-fx-background-color: #ffca28;" text="Reports" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXButton>
+                  <JFXButton layoutX="360.0" layoutY="31.0" onAction="#logAsStaffOnAction" style="-fx-background-color: #ff4155;" text="Login as Receptionist" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXButton>
                </children>
             </AnchorPane>
          </children>

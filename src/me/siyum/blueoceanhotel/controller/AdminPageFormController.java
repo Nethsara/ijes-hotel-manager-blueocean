@@ -15,6 +15,7 @@ import me.siyum.blueoceanhotel.util.Navigation;
 import me.siyum.blueoceanhotel.util.Routes;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -22,9 +23,26 @@ public class AdminPageFormController {
     public Circle btnMinimize;
     public Circle btnClose;
     public Label lblDateTime;
+    public Label lblTotalRooms;
+    public Label lblTotalCustomer;
+    public Label lblTotalStaff;
+    public Label lblTotalMeals;
+    public Label lblTotalRevenue;
 
     public void initialize(){
+        setData();
         setDateAndTime();
+    }
+
+    public void setData(){
+        try {
+            lblTotalCustomer.setText(CustomerController.getCustomerCount());
+            lblTotalRooms.setText(RoomsController.getRoomCount());
+            lblTotalStaff.setText(CustomerController.getStaffCount());
+            lblTotalMeals.setText(MealsController.getMealCount());
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "Data loading error, Please check DB").show();
+        }
     }
     public void closeOnAction() {
         Stage stage = (Stage) btnClose.getScene().getWindow();

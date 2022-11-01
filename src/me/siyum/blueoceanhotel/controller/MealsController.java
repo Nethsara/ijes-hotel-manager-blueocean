@@ -42,4 +42,13 @@ public class MealsController {
     public static ResultSet getLastID() throws SQLException, ClassNotFoundException {
         return CRUDUtil.execute("SELECT id FROM meals ORDER BY id DESC LIMIT 1");
     }
+
+    public static String getMealCount() throws SQLException, ClassNotFoundException {
+        ResultSet execute = CRUDUtil.execute("SELECT COUNT(id) FROM meals;");
+        String x = "N/A";
+        if(execute.next()){
+            x = execute.getString(1);
+        }
+        return x;
+    }
 }

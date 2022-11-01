@@ -82,7 +82,7 @@
                         <JFXComboBox fx:id="cmbMealSelect" layoutX="35.0" layoutY="187.0" prefHeight="25.0" prefWidth="198.0" promptText="Select Meal ID" />
                         <JFXTextField fx:id="txtMealName" editable="false" layoutX="283.0" layoutY="187.0" prefHeight="25.0" prefWidth="184.0" promptText="Meal Name" />
                         <JFXTextField fx:id="txtMealPrice" editable="false" layoutX="520.0" layoutY="187.0" prefHeight="25.0" prefWidth="184.0" promptText="Meal Price" />
-                        <JFXCheckBox fx:id="chkMeals" layoutX="35.0" layoutY="83.0" text="Include Meals" />
+                        <JFXCheckBox fx:id="chkMeals" layoutX="35.0" layoutY="83.0" onAction="#stateChanged" text="Include Meals" />
                         <JFXButton fx:id="btnBackStep1" layoutX="546.0" layoutY="269.0" onAction="#backToStepOneOnAction" style="-fx-border-color: blue; -fx-border-radius: 15;" text="Back">
                             <font>
                                 <Font name="System Bold" size="15.0" />
@@ -387,7 +387,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <Label layoutX="14.0" layoutY="16.0" text="Dashboard" textFill="WHITE">
+            <Label layoutX="14.0" layoutY="16.0" text="Make a Reservation" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="23.0" />
                </font>

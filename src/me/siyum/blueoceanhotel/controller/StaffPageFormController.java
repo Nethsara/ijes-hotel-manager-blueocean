@@ -28,6 +28,18 @@ public class StaffPageFormController {
 
     public void initialize(){
         setDateAndTime();
+        setData();
+    }
+
+    public void setData(){
+        try {
+            lblAvailableRoom.setText(RoomsController.getAllAvailableRoomsCount());
+            lblAvailableReservedRoom.setText(RoomsController.getRoomReservedCount());
+            lblTotalCustomers.setText(CustomerController.getCustomerCount());
+            lblTotalMeals.setText(MealsController.getMealCount());
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "Data loading error, Please check DB").show();
+        }
     }
     public void closeOnAction(MouseEvent mouseEvent) {
         Stage stage = (Stage) btnClose.getScene().getWindow();
