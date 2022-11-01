@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
@@ -31,8 +30,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class RoomsFormController {
-    public AnchorPane pane;
-    public Button btnBackToDash;
     public TextField txtRoomID;
     public JFXRadioButton radionAv;
     public JFXRadioButton radioNA;
@@ -139,7 +136,7 @@ public class RoomsFormController {
                         set.getString(1),
                         set.getString(2),
                         set.getDouble(3),
-                        set.getBoolean(4) ? "No" :  "Yes",
+                        set.getBoolean(4) ? "No" : "Yes",
                         set.getBoolean(5) ? "Yes" : "No",
                         btn);
                 tmList.add(tm);

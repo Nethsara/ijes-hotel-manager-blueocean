@@ -121,18 +121,6 @@ public class BookingPageFormController {
 
                 }
 
-//                if (set.getString(4).equalsIgnoreCase("Not Available")) {
-//                    btn.setText("Room Unavailable");
-//                    btn.setStyle("-fx-base: #c0392b; -fx-border-radius: 15; -fx-background-radius: 15;");
-//
-//                    btn.setDisable(true);
-//                } else if (set.getString(4).equalsIgnoreCase("Available")
-//                        && (set.getString(5).equalsIgnoreCase("Not Reserved"))) {
-//                    btn.setText("Book");
-//                    btn.setDisable(false);
-//                    btn.setStyle("-fx-base: #2980b9; -fx-border-radius: 15; -fx-background-radius: 15;");
-//                }
-
                 RoomTm tm = new RoomTm(
                         set.getString(1),
                         set.getString(2),

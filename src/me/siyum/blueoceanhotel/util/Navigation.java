@@ -32,7 +32,6 @@ public class Navigation {
                 initUI("ReportsPageForm");
                 break;
             case STAFFROOM:
-                System.out.println("Staff");
                 initUI("StaffRoomsPageForm");
                 break;
             case CUSTOMER:
@@ -46,6 +45,8 @@ public class Navigation {
                 break;
             case MEAL:
                 initUI("MealsPageForm");
+                break;
+            default:initUI("WelcomePageForm");
         }
     }
 

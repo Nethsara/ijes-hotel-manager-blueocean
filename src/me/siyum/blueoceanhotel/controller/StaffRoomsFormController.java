@@ -99,7 +99,6 @@ public class StaffRoomsFormController {
                     if (buttonType.get() == ButtonType.YES) {
                         try {
                             boolean isChangedStatus = RoomsController.changeStatus(tm.getId());
-                            System.out.println(isChangedStatus);
                             if (isChangedStatus) {
                                 searchRooms(searchText);
                                 new Alert(Alert.AlertType.INFORMATION, "Status updated success!").show();

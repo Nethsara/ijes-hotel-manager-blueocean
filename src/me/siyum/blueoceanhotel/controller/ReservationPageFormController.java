@@ -101,7 +101,6 @@ public class ReservationPageFormController {
                     if (buttonType.get() == ButtonType.YES) {
                         try {
                             boolean isChangedStatus = ReservationController.changeStatus(tm.getId());
-                            System.out.println(isChangedStatus);
                             if (isChangedStatus) {
                                 searchRooms(searchText);
                                 new Alert(Alert.AlertType.INFORMATION, "Reservation Cancelled!").show();
@@ -111,9 +110,7 @@ public class ReservationPageFormController {
                             }
                         } catch (SQLException | ClassNotFoundException e) {
                             new Alert(Alert.AlertType.ERROR, "DB Error, Please contact Admin");
-
                         }
-
                     }
                 });
             }
