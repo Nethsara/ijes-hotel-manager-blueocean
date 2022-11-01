@@ -21,7 +21,7 @@
         <AnchorPane layoutX="291.0" layoutY="74.0" prefHeight="72.0" prefWidth="745.0" style="-fx-background-color: transparent; -fx-background-radius: 15; -fx-border-color: e8e8e8; -fx-border-radius: 15;">
             <children>
                 <TextField fx:id="txtSearch" layoutX="20.0" layoutY="22.0" prefHeight="29.0" prefWidth="559.0" promptText="Search Reservations" />
-            <JFXButton layoutX="605.0" layoutY="20.0" onMouseClicked="#newReservationOnAction" style="-fx-border-color: black; -fx-background-radius: 15; -fx-border-radius: 15;" text="New Reservation">
+            <JFXButton layoutX="605.0" layoutY="20.0" onMouseClicked="#newReservationOnAction" style="-fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="New Reservation">
                <font>
                   <Font size="14.0" />
                </font>

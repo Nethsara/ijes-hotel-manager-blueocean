@@ -125,7 +125,7 @@
                                 <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
-                        <JFXButton fx:id="btnCancel" layoutX="535.0" layoutY="316.0" onAction="#cancelOnAction" style="-fx-border-color: red; -fx-border-radius: 15;" text="Cancel">
+                        <JFXButton fx:id="btnBack" layoutX="544.0" layoutY="316.0" onAction="#backToStep2" style="-fx-border-color: blue; -fx-border-radius: 15;" text="Back">
                             <font>
                                 <Font name="System Bold" size="15.0" />
                             </font>
@@ -142,63 +142,7 @@
                         <Label layoutX="471.0" layoutY="151.0" text="Meal Price" />
                         <Label layoutX="299.0" layoutY="228.0" text="Customer ID" />
                         <JFXTextField fx:id="txtFCustID" editable="false" layoutX="256.0" layoutY="261.0" prefHeight="25.0" prefWidth="153.0" />
-                    </children>
-                </AnchorPane>
-                <AnchorPane fx:id="panePrint" layoutX="11.0" layoutY="30.0" prefHeight="385.0" prefWidth="727.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: e8e8e8; -fx-border-radius: 15;">
-                    <children>
-                        <ImageView fitHeight="219.0" fitWidth="234.0" layoutX="281.0" layoutY="59.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../assets/logo-without-text-white.png" />
-                            </image>
-                        </ImageView>
-                        <JFXButton fx:id="btnPrint" layoutX="296.0" layoutY="338.0" onAction="#printOnAction" style="-fx-border-color: blue; -fx-border-radius: 15;" text="Print">
-                            <font>
-                                <Font name="System Bold" size="15.0" />
-                            </font>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                        </JFXButton>
-                        <JFXTextField fx:id="txtPRoomID" editable="false" layoutX="200.0" layoutY="79.0" prefHeight="25.0" prefWidth="120.0" />
-                        <JFXTextField fx:id="txtPRoomType" editable="false" layoutX="431.0" layoutY="79.0" />
-                        <JFXTextField fx:id="txtPRoomPrice" editable="false" layoutX="434.0" layoutY="199.0" prefHeight="25.0" prefWidth="135.0" />
-                        <JFXTextField fx:id="txtPDays" layoutX="338.0" layoutY="240.0" />
-                        <JFXTextField fx:id="txtPMealID" editable="false" layoutX="200.0" layoutY="139.0" prefHeight="25.0" prefWidth="120.0" />
-                        <JFXTextField fx:id="txtPMealType" editable="false" layoutX="200.0" layoutY="194.0" prefHeight="25.0" prefWidth="120.0" />
-                        <JFXTextField fx:id="txtPMealPrice" editable="false" layoutX="434.0" layoutY="139.0" prefHeight="25.0" prefWidth="135.0" />
-                        <Label layoutX="265.0" layoutY="301.0" text="Total : ">
-                            <font>
-                                <Font name="System Bold" size="18.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="328.0" layoutY="301.0" text="Rs.">
-                            <font>
-                                <Font name="System Bold" size="18.0" />
-                            </font>
-                        </Label>
-
-                        <Label layoutX="121.0" layoutY="91.0" text="Room ID" />
-                        <Label layoutX="352.0" layoutY="91.0" text="Room Type" />
-                        <Label layoutX="352.0" layoutY="211.0" text="Room Price" />
-                        <Label layoutX="252.0" layoutY="252.0" text="Days Staying" />
-                        <Label layoutX="121.0" layoutY="151.0" text="Meal ID" />
-                        <Label layoutX="117.0" layoutY="206.0" text="Meal Type" />
-                        <Label layoutX="352.0" layoutY="151.0" text="Meal Price" />
-                        <Label layoutX="302.0" layoutY="4.0" text="Booking Success">
-                            <font>
-                                <Font name="System Bold" size="16.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="lblPrintPage" layoutX="362.0" layoutY="301.0" text="100000">
-                            <font>
-                                <Font name="System Bold" size="18.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="582.0" layoutY="21.0" text="Date : " />
-                        <Label layoutX="64.0" layoutY="21.0" text="Customer ID : " />
-                        <Label fx:id="lblCustID" layoutX="145.0" layoutY="21.0" text="ID" />
-                        <Label fx:id="lblDateandTime" layoutX="617.0" layoutY="21.0" text="Date &amp; Time" />
-                  <JFXButton fx:id="btnPrint1" layoutX="365.0" layoutY="338.0" onAction="#printOnAction" style="-fx-border-color: black; -fx-border-radius: 15;" text="Email">
+                  <JFXButton fx:id="btnCancel" layoutX="461.0" layoutY="316.0" onAction="#cancelOnAction" style="-fx-border-color: red; -fx-border-radius: 15;" text="Cancel">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -206,6 +150,70 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
+                      <AnchorPane fx:id="panePrint" layoutX="7.0" layoutY="1.0" prefHeight="385.0" prefWidth="727.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: e8e8e8; -fx-border-radius: 15;">
+                          <children>
+                              <ImageView fitHeight="219.0" fitWidth="234.0" layoutX="281.0" layoutY="59.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../assets/logo-without-text-white.png" />
+                                  </image>
+                              </ImageView>
+                              <JFXButton fx:id="btnPrint" layoutX="296.0" layoutY="338.0" onAction="#printOnAction" style="-fx-border-color: blue; -fx-border-radius: 15;" text="Print">
+                                  <font>
+                                      <Font name="System Bold" size="15.0" />
+                                  </font>
+                                  <cursor>
+                                      <Cursor fx:constant="HAND" />
+                                  </cursor>
+                              </JFXButton>
+                              <JFXTextField fx:id="txtPRoomID" editable="false" layoutX="200.0" layoutY="79.0" prefHeight="25.0" prefWidth="120.0" />
+                              <JFXTextField fx:id="txtPRoomType" editable="false" layoutX="431.0" layoutY="79.0" />
+                              <JFXTextField fx:id="txtPRoomPrice" editable="false" layoutX="434.0" layoutY="199.0" prefHeight="25.0" prefWidth="135.0" />
+                              <JFXTextField fx:id="txtPDays" layoutX="338.0" layoutY="240.0" />
+                              <JFXTextField fx:id="txtPMealID" editable="false" layoutX="200.0" layoutY="139.0" prefHeight="25.0" prefWidth="120.0" />
+                              <JFXTextField fx:id="txtPMealType" editable="false" layoutX="200.0" layoutY="194.0" prefHeight="25.0" prefWidth="120.0" />
+                              <JFXTextField fx:id="txtPMealPrice" editable="false" layoutX="434.0" layoutY="139.0" prefHeight="25.0" prefWidth="135.0" />
+                              <Label layoutX="265.0" layoutY="301.0" text="Total : ">
+                                  <font>
+                                      <Font name="System Bold" size="18.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="328.0" layoutY="301.0" text="Rs.">
+                                  <font>
+                                      <Font name="System Bold" size="18.0" />
+                                  </font>
+                              </Label>
+      
+                              <Label layoutX="121.0" layoutY="91.0" text="Room ID" />
+                              <Label layoutX="352.0" layoutY="91.0" text="Room Type" />
+                              <Label layoutX="352.0" layoutY="211.0" text="Room Price" />
+                              <Label layoutX="252.0" layoutY="252.0" text="Days Staying" />
+                              <Label layoutX="121.0" layoutY="151.0" text="Meal ID" />
+                              <Label layoutX="117.0" layoutY="206.0" text="Meal Type" />
+                              <Label layoutX="352.0" layoutY="151.0" text="Meal Price" />
+                              <Label layoutX="302.0" layoutY="4.0" text="Booking Success">
+                                  <font>
+                                      <Font name="System Bold" size="16.0" />
+                                  </font>
+                              </Label>
+                              <Label fx:id="lblPrintPage" layoutX="362.0" layoutY="301.0" text="100000">
+                                  <font>
+                                      <Font name="System Bold" size="18.0" />
+                                  </font>
+                              </Label>
+                              <Label layoutX="582.0" layoutY="21.0" text="Date : " />
+                              <Label layoutX="64.0" layoutY="21.0" text="Customer ID : " />
+                              <Label fx:id="lblCustID" layoutX="145.0" layoutY="21.0" text="ID" />
+                              <Label fx:id="lblDateandTime" layoutX="617.0" layoutY="21.0" text="Date &amp; Time" />
+                        <JFXButton fx:id="btnPrint1" layoutX="365.0" layoutY="338.0" onAction="#printOnAction" style="-fx-border-color: black; -fx-border-radius: 15;" text="Email">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                          </children>
+                      </AnchorPane>
                     </children>
                 </AnchorPane>
                 <Label layoutX="21.0" text="Let's make a reservation">
@@ -244,6 +252,16 @@
         </AnchorPane>
       <AnchorPane prefHeight="600.0" prefWidth="278.0" style="-fx-background-color: #1b2130;">
          <children>
+            <FontAwesomeIconView fill="WHITE" glyphName="HOME" layoutX="68.0" layoutY="314.0" size="20" wrappingWidth="11.142857551574707">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </FontAwesomeIconView>
+            <Label layoutX="99.0" layoutY="298.0" text="Dashboard" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
             <AnchorPane layoutX="42.0" layoutY="293.0" onMouseClicked="#staffDashboardOnAction" opacity="0.1" prefHeight="27.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -283,11 +301,6 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <FontAwesomeIconView fill="WHITE" glyphName="HOME" layoutX="68.0" layoutY="314.0" size="20" wrappingWidth="11.142857551574707">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </FontAwesomeIconView>
             <FontAwesomeIconView fill="WHITE" glyphName="BELL" layoutX="71.0" layoutY="382.0" size="16" wrappingWidth="11.142857551574707">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -306,11 +319,6 @@
             <Label layoutX="67.0" layoutY="357.0" prefHeight="15.0" prefWidth="25.0" style="-fx-background-color: red; -fx-background-radius: 10;" text=" 99+" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="10.0" />
-               </font>
-            </Label>
-            <Label layoutX="99.0" layoutY="298.0" text="Dashboard" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
                </font>
             </Label>
             <Label layoutX="100.0" layoutY="329.0" text="Customer Manager" textFill="WHITE">
